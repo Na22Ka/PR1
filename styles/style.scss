@@ -1,0 +1,105 @@
+// ПЕРЕМЕННЫЕ (минимум 2)
+$primary-color: #ff6b6b;      // Основной цвет (для кнопки, акцентов)
+$font-family-main: 'Arial', sans-serif;
+$border-radius: 12px;          // Радиус скругления
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+// МИКСИН (минимум 1) - для адаптивных изображений
+@mixin responsive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// МИКСИН для карточки товара
+@mixin card-styles {
+  background: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  overflow: hidden;
+  font-family: $font-family-main;
+}
+
+// ОСНОВНЫЕ СТИЛИ
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+// ВЛОЖЕННАЯ СТРУКТУРА для карточки товара
+.product-card {
+  @include card-styles;
+  width: 320px;
+  margin: 20px;
+  
+  // Вложенность: блок изображения
+  &__image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    
+    img {
+      @include responsive-image;
+    }
+  }
+  
+  // Вложенность: заголовок
+  &__title {
+    margin: 16px 16px 8px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  // Вложенность: описание
+  &__description {
+    margin: 0 16px 16px;
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+  
+  // Вложенность: подвал карточки
+  &__footer {
+    padding: 16px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  // Вложенность: цена
+  &__price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $primary-color;
+  }
+  
+  // Вложенность: кнопка
+  &__button {
+    padding: 10px 20px;
+    background: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    
+    &:hover {
+      background: darken($primary-color, 10%);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
